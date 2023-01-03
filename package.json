@@ -1,0 +1,15 @@
+{
+  "name": "html-css__gllacy",
+  "version": "1.0.0",
+  "description": "Проект вёрстки. Webpack, scss, бэм",
+  "private": "true",
+  "scripts": {
+    "lint": "stylelint \"**/*.css\""
+  },
+  "author": "Akimba",
+  "license": "ISC",
+  "devDependencies": {
+    "stylelint": "14.16.1",
+    "stylelint-config-htmlacademy": "1.1.4"
+  }
+}
