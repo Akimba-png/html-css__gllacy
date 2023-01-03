@@ -4,12 +4,20 @@
   "description": "Проект вёрстки. Webpack, scss, бэм",
   "private": "true",
   "scripts": {
-    "lint": "stylelint \"**/*.css\""
+    "start": "webpack serve --open",
+    "lint": "stylelint \"**/*.css\"",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
   },
   "author": "Akimba",
   "license": "ISC",
   "devDependencies": {
+    "clean-webpack-plugin": "4.0.0",
+    "html-webpack-plugin": "5.5.0",
     "stylelint": "14.16.1",
-    "stylelint-config-htmlacademy": "1.1.4"
+    "stylelint-config-htmlacademy": "1.1.4",
+    "webpack": "5.75.0",
+    "webpack-cli": "5.0.1",
+    "webpack-dev-server": "4.11.1"
   }
 }
