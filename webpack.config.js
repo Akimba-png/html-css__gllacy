@@ -2,7 +2,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -17,15 +18,7 @@ module.exports = {
     },
     port: 5000,
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './source/index.html',
-    }),
-    new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
-    }),
-  ],
+
   module: {
     rules: [
       {
@@ -45,6 +38,35 @@ module.exports = {
       }
     ],
   },
+
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './source/index.html',
+    }),
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
+    }),
+    new SVGSpritemapPlugin('./source/img/icons/**/*.svg', {
+      output: {
+        filename: 'img/icons/sprite.svg',
+        svg: {
+          sizes: false,
+        }
+      },
+      sprite: {
+        prefix: false,
+        generate: {
+          use: true,
+          symbol: true,
+          view: '-fragment',
+        },
+      },
+      styles: {
+        format: 'fragment',
+      }
+    }),
+  ],
   optimization: {
     minimizer: [
       new CssMinimizerPlugin(),
