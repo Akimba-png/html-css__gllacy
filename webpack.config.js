@@ -23,11 +23,40 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [
+          {loader: MiniCssExtractPlugin.loader},
+          {
+            loader: 'css-loader',
+            options: {
+              url: {
+                filter: (url) => {
+                  if (/\.svg/.test(url)) {
+                    return false;
+                  }
+                  return true;
+                },
+              }
+            },
+          }
+        ],
       },
       {
         test: /\.s[ac]ss$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+        use: [
+          {loader: MiniCssExtractPlugin.loader},
+          {
+            loader: 'css-loader',
+            options: {
+              url: {
+                filter: (url) => {
+                  if (/\.svg/.test(url)) {
+                    return false;
+                  }
+                  return true;
+                },
+              }
+            },
+          }, 'sass-loader'],
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
@@ -52,7 +81,8 @@ module.exports = {
         filename: 'img/icons/sprite.svg',
         svg: {
           sizes: false,
-        }
+        },
+        svgo: true,
       },
       sprite: {
         prefix: false,
