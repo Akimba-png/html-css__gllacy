@@ -24,6 +24,16 @@ module.exports = {
       {
         test: /\.html$/,
         loader: 'html-loader',
+        options: {
+          sources: {
+            urlFilter: (_attribute, value, _resourcePath) => {
+              if (/\.svg$/.test(value)) {
+                return false;
+              }
+              return true;
+            },
+          },
+        },
       },
       {
         test: /\.css$/,
