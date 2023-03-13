@@ -7,7 +7,7 @@ const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './source/index.js',
+  entry: ['@babel/polyfill', './source/index.js'],
   output: {
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
@@ -108,6 +108,18 @@ module.exports = {
         generator: {
           filename: 'img/[name].[hash][ext]',
        },
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              ['@babel/preset-env', { targets: "defaults" }]
+            ],
+          },
+        },
       },
     ],
   },
