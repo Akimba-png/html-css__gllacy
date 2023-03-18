@@ -2,7 +2,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 
 module.exports = {
@@ -51,7 +50,18 @@ module.exports = {
                 },
               }
             },
-          }, 'sass-loader'],
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  require('postcss-preset-env'),
+                ],
+              },
+            },
+          },
+          'sass-loader'],
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
@@ -147,9 +157,4 @@ module.exports = {
       }
     }),
   ],
-  optimization: {
-    minimizer: [
-      new CssMinimizerPlugin(),
-    ],
-  },
 };
