@@ -4,10 +4,10 @@
   "description": "Проект вёрстки. Webpack, scss, бэм",
   "private": "true",
   "scripts": {
-    "start": "webpack serve --open",
+    "start": "cross-env NODE_ENV=development webpack serve --open",
     "lint": "stylelint \"**/*.css\"",
-    "dev": "webpack --mode development",
-    "build": "webpack --mode production"
+    "dev": "cross-env NODE_ENV=development webpack --mode development",
+    "build": "cross-env NODE_ENV=production webpack --mode production"
   },
   "author": "Akimba",
   "license": "ISC",
@@ -17,7 +17,7 @@
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-typescript": "^7.21.0",
     "babel-loader": "^9.1.2",
-    "clean-webpack-plugin": "4.0.0",
+    "cross-env": "^7.0.3",
     "css-loader": "6.7.3",
     "html-loader": "^4.2.0",
     "html-webpack-plugin": "5.5.0",

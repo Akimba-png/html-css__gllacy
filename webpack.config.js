@@ -1,16 +1,19 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 
+const mode = process.env.NODE_ENV || 'development';
+const isDev = mode === 'development';
+
 module.exports = {
-  mode: 'development',
+  mode,
   devtool: 'source-map',
-  entry: ['@babel/polyfill', './source/index.js'],
+  entry: ['@babel/polyfill', path.resolve(__dirname, 'source', 'index.js')],
   output: {
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
+    clean: true,
   },
   devServer: {
     static: {
@@ -73,7 +76,7 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|webp|gif)/,
-        use: [
+        use: isDev ? [
           {
             loader: 'image-webpack-loader',
             options: {
@@ -95,7 +98,7 @@ module.exports = {
               }
             }
           },
-        ],
+        ] : [],
         type: 'asset/resource',
         generator: {
           filename: 'img/[name].[hash][ext]',
@@ -133,7 +136,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './source/index.html',
     }),
-    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
     }),
