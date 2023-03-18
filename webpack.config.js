@@ -6,6 +6,7 @@ const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 
 module.exports = {
   mode: 'development',
+  devtool: 'source-map',
   entry: ['@babel/polyfill', './source/index.js'],
   output: {
     filename: '[name].[contenthash].js',
