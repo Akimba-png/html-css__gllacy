@@ -36,26 +36,7 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/,
-        use: [
-          {loader: MiniCssExtractPlugin.loader},
-          {
-            loader: 'css-loader',
-            options: {
-              url: {
-                filter: (url) => {
-                  if (/\.svg/.test(url)) {
-                    return false;
-                  }
-                  return true;
-                },
-              }
-            },
-          }
-        ],
-      },
-      {
-        test: /\.s[ac]ss$/,
+        test: /\.(c|sa|sc)ss$/,
         use: [
           {loader: MiniCssExtractPlugin.loader},
           {
